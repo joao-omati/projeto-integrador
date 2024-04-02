@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Registro</title>
+</head>
+<body>
+    <h1>Atualizar Registro</h1>
+    <form action="/atualizar" method="post">
+        <label for="tipo">Tipo de Registro:</label>
+        <select id="tipo" name="tipo">
+            <option value="1">Cliente</option>
+            <option value="2">Usuário</option>
+        </select><br>
+        <label for="cid">ID do Registro:</label>
+        <input type="text" id="cid" name="cid"><br>
+        <input type="submit" value="Atualizar">
+    </form>
+</body>
+</html>
