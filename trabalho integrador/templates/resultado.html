@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!---->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado da Busca</title>
+</head>
+<body>
+    <h1>Resultado da Busca</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nome/Usuario</th>
+            <th>CPF/Senha</th>
+            <th>Histórico/Permissão</th>
+            <th>Score/Nível</th>
+        </tr>
+        {% for registro in resultado %}
+            <tr>
+                <td>{{ registro[0] }}</td>
+                <td>{{ registro[1] }}</td>
+                <td>{{ registro[2] }}</td>
+                <td>{{ registro[3] }}</td>
+                <td>{{ registro[4] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

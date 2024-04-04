@@ -20,6 +20,8 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'usuario' in session:
+        session.pop('usuario', None)
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -46,10 +48,25 @@ def menu():
 def buscar():
     if is_autenticado():
         if request.method == 'POST':
-            tipo = int(request.form['tipo'])
-            resultado = banco.buscar_registro(tipo, None, None)
+            id_c = request.form['id']
+            nome = request.form['nome']
+            cpf = request.form['cpf']
+            print(id_c, nome, cpf)
+            resultado = banco.buscar_registro_cliente(id_c, nome, cpf)
             return render_template('resultado.html', resultado=resultado)
         return render_template('buscar.html')
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/buscarusuario', methods=['GET', 'POST'])
+def buscarusuario():
+    if is_autenticado():
+        if request.method == 'POST':
+            id_u = request.form['id']
+            usuario = request.form['usuario']
+            resultado = banco.buscar_registro_usuario(id_u, usuario)
+            return render_template('resultado.html', resultado=resultado)
+        return render_template('buscarusuario.html')
     else:
         return redirect(url_for('login'))
 
