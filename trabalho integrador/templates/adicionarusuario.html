@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Registro</title>
+</head>
+<body>
+<h1>Adicionar Registro</h1>
+<form action="/adicionarusuario" method="post">
+    <label for="usuario"></label><input type="text" id="usuario" name="usuario" placeholder="Insira usuario"><br>
+    <label for="senha"></label><input type="text" id="senha" name="senha" placeholder="Insira senha"><br>
+    <input type="submit" value="Adicionar">
+    <select id="per" name="per">
+        <option value="1">Usuário</option>
+        <option value="2">Moderador</option>
+        <option value="3">Administrador</option>
+    </select>
+
+</form>
+</body>
+</html>

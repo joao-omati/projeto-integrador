@@ -8,11 +8,10 @@
 <body>
     <h1>Adicionar Registro</h1>
     <form action="/adicionar" method="post">
-        <label for="tipo">Tipo de Registro:</label>
-        <select id="tipo" name="tipo">
-            <option value="1">Cliente</option>
-            <option value="2">Usuário</option>
-        </select>
+        <label for="nome"></label><input type="text" id="nome" name="nome" placeholder="Insira nome"><br>
+        <label for="cpf"></label><input type="number" id="cpf" name="cpf"  placeholder="Insira CPF"><br>
+        <label for="historico"></label><input type="text" id="historico" name="historico"  placeholder="Insira anos de pagamento em dia"><br>
+        <label for="score"></label><input type="number" id="score" name="score"  placeholder="Insira Score"><br>
         <input type="submit" value="Adicionar">
     </form>
 </body>
