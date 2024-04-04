@@ -125,15 +125,13 @@ class BancoDeDados:
                 (nome, cpf, historico, score))
 
             con.commit()
-            input("Adicionado com sucesso! Aperte ENTER para prosseguir")
+
 
 
     def adicionar_registro_usuario(self, usuario, senha, per):
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()
-            usuario = input("Insira o Usuário: ")
-            senha = hashar_senhas(input("Insira a senha: "))
-            per = int(input("Insira o nível de permissão (1 - Usuário, 2 - Supervisor): "))
+            senha = hashar_senhas(senha)
             cursor.execute(
                 'INSERT INTO usuario (usuario_usuario, usuario_senha, usuario_nivel) VALUES (?, ?, ?)',
                 (usuario, senha, per))

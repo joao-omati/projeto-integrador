@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from banco_de_dados import BancoDeDados
-from functools import wraps
+from time import sleep
 
 app = Flask(__name__)
 banco = BancoDeDados()
@@ -75,10 +75,28 @@ def buscarusuario():
 def adicionar():
     if is_autenticado():
         if request.method == 'POST':
-            tipo = int(request.form['tipo'])
-            banco.adicionar_registro(tipo, None)
+            nome = request.form['nome']
+            cpf = request.form['cpf']
+            historico = request.form['historico']
+            score = request.form['score']
+            banco.adicionar_registro_cliente(nome, cpf, historico, score)
+            return ()
             return redirect(url_for('menu'))
-        return render_template('adicionar.html')
+
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/adicionarusuario', methods=['GET', 'POST'])
+def adicionarusuario():
+    if is_autenticado():
+        if request.method == 'POST':
+            usuario = request.form['usuario']
+            senha = request.form['senha']
+            per = int(request.form['per'])
+            banco.adicionar_registro_usuario(usuario, senha, per)
+            return redirect(url_for('menu'))
+        return render_template('adicionarusuario.html')
     else:
         return redirect(url_for('login'))
 
