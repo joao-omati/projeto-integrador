@@ -100,56 +100,45 @@ class BancoDeDados:
 
         con.commit()
 
-    def buscar_registro(self, tipo, usuario_senha, usario_nome):
+    def buscar_registro_cliente(self, id, nome, cpf):
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()
-            if tipo == 1:  # todo consertar
-                dado_busca = input("Insira nome ou CPF para busca, ou * para exibir todos: ")
-            elif tipo == 2:
-                dado_busca = input("Insira Usuario para busca, ou * para exibir todos: ")
+            busca_res = cursor.execute('SELECT * FROM "cliente" WHERE "cliente_id" LIKE ? AND "cliente_nome" '
+                                       'LIKE ? AND cliente_cpf LIKE ?', (f'%{id}%', f'%{nome}%', f'%{cpf}%'))
+        return busca_res.fetchall()
 
-            if dado_busca != "*":
-                if tipo == 1:
-                    table, coluna = "cliente", "cliente_nome"
-                elif tipo == 2:
-                    self.confirmar_alteracao(usuario_senha)
-                    table, coluna = "usuario", "usuario_usuario"
-                if dado_busca.isdigit() and tipo == 1:
-                    busca_res = cursor.execute('SELECT * FROM cliente WHERE cliente_cpf LIKE ?', (f'%{dado_busca}%',))
-                else:
-                    busca_res = cursor.execute(f'SELECT * FROM {table} WHERE {coluna} LIKE ?', (f'%{dado_busca}%',))
-            else:
-                if tipo == 1:
-                    table = "cliente"
-                elif tipo == 2:
-                    self.confirmar_alteracao(usario_nome)
-                    table = "usuario"
-                busca_res = cursor.execute(f'SELECT * FROM {table}')
-            return busca_res.fetchall()
 
-    def adicionar_registro(self, tipo, usuario_nome):
+    def buscar_registro_usuario(self, id, usuario):
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()
-            if self.confirmar_alteracao(usuario_nome) == 1:
-                if tipo == 1:
-                    nome = input("Insira nome: ")
-                    cpf = input("Insira CPF: ")
-                    historico = input("Insira historico de pagamento em dia separado por vírgula: ")
-                    score = int(input("Insira Score: "))
-                    cursor.execute(
-                        'INSERT INTO cliente (cliente_nome, cliente_cpf, cliente_historico, cliente_score) VALUES '
-                        '(?, ?, ?, ?)',
-                        (nome, cpf, historico, score))
-                elif tipo == 2:
-                    usuario = input("Insira o Usuário: ")
-                    senha = hashar_senhas(input("Insira a senha: "))
-                    per = int(input("Insira o nível de permissão (1 - Usuário, 2 - Supervisor): "))
-                    cursor.execute(
-                        'INSERT INTO usuario (usuario_usuario, usuario_senha, usuario_nivel) VALUES (?, ?, ?)',
-                        (usuario, senha, per))
+            busca_res = cursor.execute('SELECT * FROM "usuario" WHERE "usuario_id" LIKE ? AND "usuario_usuario" '
+                                       'LIKE ?', (f'%{id}%', f'%{usuario}%'))
+        return busca_res.fetchall()
 
-                con.commit()
-                input("Adicionado com sucesso! Aperte ENTER para prosseguir")
+
+    def adicionar_registro_cliente(self, nome, cpf, historico, score):
+        with sqlite3.connect(self.nome_banco) as con:
+            cursor = con.cursor()
+            cursor.execute(
+                'INSERT INTO cliente (cliente_nome, cliente_cpf, cliente_historico, cliente_score) VALUES '
+                '(?, ?, ?, ?)',
+                (nome, cpf, historico, score))
+
+            con.commit()
+            input("Adicionado com sucesso! Aperte ENTER para prosseguir")
+
+
+    def adicionar_registro_usuario(self, usuario, senha, per):
+        with sqlite3.connect(self.nome_banco) as con:
+            cursor = con.cursor()
+            usuario = input("Insira o Usuário: ")
+            senha = hashar_senhas(input("Insira a senha: "))
+            per = int(input("Insira o nível de permissão (1 - Usuário, 2 - Supervisor): "))
+            cursor.execute(
+                'INSERT INTO usuario (usuario_usuario, usuario_senha, usuario_nivel) VALUES (?, ?, ?)',
+                (usuario, senha, per))
+            con.commit()
+
 
     def atualizar_registro(self, resultado, usuario_nome, tipo):
         if self.confirmar_alteracao(usuario_nome) == 1:
@@ -185,6 +174,7 @@ class BancoDeDados:
         else:
             return
 
+
     def excluir_registro(self, tipo, cid, usuario_nome):
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()
@@ -199,5 +189,3 @@ class BancoDeDados:
                 input("Excluido com sucesso! Aperte ENTER para prosseguir.")
             else:
                 return
-
-
