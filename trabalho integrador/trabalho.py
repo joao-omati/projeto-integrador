@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from banco_de_dados import BancoDeDados
-from time import sleep
+from functools import wraps
 
 app = Flask(__name__)
 banco = BancoDeDados()
@@ -25,12 +25,13 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if banco.validar_senha(password, username) == 'senha':
+        result = banco.validar_senha(password, username)
+        if result == 'senha':
             return "Senha incorreta!"
-        elif banco.validar_senha(password, username) == 'usuario':
+        elif result == 'usuario':
             return "Usuário inválido!"
         else:
-            session['usuario'] = banco.validar_senha(password, username)
+            session['usuario'] = result
             return redirect(url_for('menu'))
 
     return render_template('login.html')
@@ -58,6 +59,7 @@ def buscar():
     else:
         return redirect(url_for('login'))
 
+
 @app.route('/buscarusuario', methods=['GET', 'POST'])
 def buscarusuario():
     if is_autenticado():
@@ -80,9 +82,8 @@ def adicionar():
             historico = request.form['historico']
             score = request.form['score']
             banco.adicionar_registro_cliente(nome, cpf, historico, score)
-            return ()
             return redirect(url_for('menu'))
-
+        return render_template('adicionar.html')
     else:
         return redirect(url_for('login'))
 
@@ -96,21 +97,29 @@ def adicionarusuario():
             per = int(request.form['per'])
             banco.adicionar_registro_usuario(usuario, senha, per)
             return redirect(url_for('menu'))
-        return render_template('adicionarusuario.html')
+        return render_template('adicionar.html')
     else:
+
         return redirect(url_for('login'))
 
 
-@app.route('/atualizar', methods=['GET', 'POST'])
-def atualizar():
+
+
+
+@app.route('/atualizar/<int:id>', methods=['GET', 'POST'])
+def atualizar(id):
+    if request.method == 'POST':
+        nome = request.form['nome']
+        cpf = request.form['cpf']
+        historico = request.form['historico']
+        score = request.form['score']
+        banco.atualizar_registro_cliente(id, nome, cpf, historico, score)
+        return redirect(url_for('menu'))
     if is_autenticado():
-        if request.method == 'POST':
-            tipo = int(request.form['tipo'])
-            cid = int(request.form['cid'])
-            resultado = banco.buscar_registro(tipo, None, None)
-            banco.atualizar_registro(resultado[cid], None, tipo)
-            return redirect(url_for('menu'))
-        return render_template('atualizar.html')
+        print(id)
+        resultados = banco.buscar_registro_cliente(id, "", "")[0]
+
+        return render_template('atualizar.html', resultados=resultados)
     else:
         return redirect(url_for('login'))
 
