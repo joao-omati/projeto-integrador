@@ -23,6 +23,8 @@
                 <td>{{ registro[2] }}</td>
                 <td>{{ registro[3] }}</td>
                 <td>{{ registro[4] }}</td>
+                <td><a href="/atualizar/{{ registro[0] }}">Atualizar</a></td>
+                <td><a href="/deletar/{{ registro[0] }}">Deletar</a></td>
             </tr>
         {% endfor %}
     </table>

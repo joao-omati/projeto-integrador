@@ -103,8 +103,10 @@ class BancoDeDados:
     def buscar_registro_cliente(self, id, nome, cpf):
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()
+            if id == "":
+                id = "%"
             busca_res = cursor.execute('SELECT * FROM "cliente" WHERE "cliente_id" LIKE ? AND "cliente_nome" '
-                                       'LIKE ? AND cliente_cpf LIKE ?', (f'%{id}%', f'%{nome}%', f'%{cpf}%'))
+                                       'LIKE ? AND cliente_cpf LIKE ?', (f'{id}', f'%{nome}%', f'%{cpf}%'))
         return busca_res.fetchall()
 
 
@@ -115,27 +117,47 @@ class BancoDeDados:
                                        'LIKE ?', (f'%{id}%', f'%{usuario}%'))
         return busca_res.fetchall()
 
-
-    def adicionar_registro_cliente(self, nome, cpf, historico, score):
+    def atualizar_registro_cliente(self, cliente_id, novo_nome=None, novo_cpf=None, novo_historico=None,
+                                   novo_score=None):
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()
-            cursor.execute(
-                'INSERT INTO cliente (cliente_nome, cliente_cpf, cliente_historico, cliente_score) VALUES '
-                '(?, ?, ?, ?)',
-                (nome, cpf, historico, score))
-
+            if novo_nome is not None:
+                cursor.execute(
+                    'UPDATE cliente SET cliente_nome = ? WHERE cliente_id = ?',
+                    (novo_nome, cliente_id))
+            if novo_cpf is not None:
+                cursor.execute(
+                    'UPDATE cliente SET cliente_cpf = ? WHERE cliente_id = ?',
+                    (novo_cpf, cliente_id))
+            if novo_historico is not None:
+                cursor.execute(
+                    'UPDATE cliente SET cliente_historico = ? WHERE cliente_id = ?',
+                    (novo_historico, cliente_id))
+            if novo_score is not None:
+                cursor.execute(
+                    'UPDATE cliente SET cliente_score = ? WHERE cliente_id = ?',
+                    (novo_score, cliente_id))
             con.commit()
 
 
-
-    def adicionar_registro_usuario(self, usuario, senha, per):
+    def atualizar_registro_usuario(self, usuario_id, novo_usuario=None, nova_senha=None, novo_nivel=None):
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()
-            senha = hashar_senhas(senha)
-            cursor.execute(
-                'INSERT INTO usuario (usuario_usuario, usuario_senha, usuario_nivel) VALUES (?, ?, ?)',
-                (usuario, senha, per))
+            if novo_usuario is not None:
+                cursor.execute(
+                    'UPDATE usuario SET usuario_usuario = ? WHERE usuario_id = ?',
+                    (novo_usuario, usuario_id))
+            if nova_senha is not None:
+                nova_senha = hashar_senhas(nova_senha)
+                cursor.execute(
+                    'UPDATE usuario SET usuario_senha = ? WHERE usuario_id = ?',
+                    (nova_senha, usuario_id))
+            if novo_nivel is not None:
+                cursor.execute(
+                    'UPDATE usuario SET usuario_nivel = ? WHERE usuario_id = ?',
+                    (novo_nivel, usuario_id))
             con.commit()
+
 
 
     def atualizar_registro(self, resultado, usuario_nome, tipo):

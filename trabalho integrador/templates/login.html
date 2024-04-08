@@ -6,14 +6,27 @@
     <title>Login</title>
 </head>
 <body>
- <!--Cara, precisa de algum tipo de div pra mostrar tipo: senha errada!, atualmente redireciona pra uma pagina vazia-->
-    <h1>Login</h1>
-    <form action="/login" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Login">
-    </form>
+<!--<script src="../scripts/login.js"></script>-->
+<!--Cara, precisa de algum tipo de div pra mostrar tipo: senha errada!, atualmente redireciona pra uma pagina vazia-->
+    <div id="popup" style="display: none;">
+        <p id="popup-text"></p>
+    </div>
+
+<h1>Login</h1>
+<form action="/login" method="post">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br><br>
+    <input type="submit" value="Login">
+
+
+</form>
+<script>
+    function showErrorPopup(message) {
+        document.getElementById('popup-text').innerText = message;
+        document.getElementById('popup').style.display = 'block';
+    }
+</script>
 </body>
 </html>
