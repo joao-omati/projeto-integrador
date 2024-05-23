@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Atualizar Registro</h1>
-    <form action="/atualizar" method="post">
+    <form action="/atualizar/{{ resultados[0] }}" method="post">
         <label for="nome"></label><input type="text" value="{{ resultados[1] }}" id="nome" name="nome" placeholder="Insira nome" ><br>
         <label for="cpf"></label><input type="number" id="cpf" name="cpf" value="{{ resultados[2] }}" placeholder="Insira CPF"><br>
         <label for="historico"></label><input type="text" id="historico" value="{{ resultados[3] }}" name="historico"  placeholder="Insira anos de pagamento em dia"><br>

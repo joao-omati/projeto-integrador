@@ -11,10 +11,10 @@
     <table border="1">
         <tr>
             <th>ID</th>
-            <th>Nome/Usuario</th>
-            <th>CPF/Senha</th>
-            <th>Histórico/Permissão</th>
-            <th>Score/Nível</th>
+            <th>Usuario</th>
+            <th>Senha</th>
+            <th>Permissão</th>
+
         </tr>
         {% for registro in resultado %}
             <tr>
@@ -23,8 +23,8 @@
                 <td>{{ registro[2] }}</td>
                 <td>{{ registro[3] }}</td>
                 <td>{{ registro[4] }}</td>
-                <td><a href="/atualizar/{{ registro[0] }}">Atualizar</a></td>
-                <td><a href="/deletar/{{ registro[0] }}">Deletar</a></td>
+                <td><a href="/atualizarusuario/{{ registro[0] }}">Atualizar</a></td>
+                <td><a href="/deletarusuario/{{ registro[0] }}">Deletar</a></td>
             </tr>
         {% endfor %}
     </table>
