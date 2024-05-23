@@ -158,8 +158,6 @@ def logout():
     session.pop('usuario', None)
     return redirect(url_for('login'))
 
-if tempo == 0:
-    session.pop('usuario', None)
 
 if __name__ == '__main__':
     app.run(debug=True)
