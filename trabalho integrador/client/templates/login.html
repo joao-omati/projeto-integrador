@@ -6,8 +6,13 @@
     <title>Login</title>
 </head>
 <body>
-<!--<script src="../scripts/login.js"></script>-->
-<!--Cara, precisa de algum tipo de div pra mostrar tipo: senha errada!, atualmente redireciona pra uma pagina vazia-->
+    <script>
+        function showPopup(message) {
+            document.getElementById("popup-text").innerText = message;
+            document.getElementById("popup").style.display = "block";
+        }
+    </script>
+
     <div id="popup" style="display: none;">
         <p id="popup-text"></p>
     </div>
@@ -22,11 +27,13 @@
 
 
 </form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
 <script>
-    function showErrorPopup(message) {
-        document.getElementById('popup-text').innerText = message;
-        document.getElementById('popup').style.display = 'block';
-    }
+    showPopup("{{ messages[0] }}");
 </script>
+    
+{% endif %}
+{% endwith %}
 </body>
 </html>

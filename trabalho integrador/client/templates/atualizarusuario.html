@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Usuario</title>
+</head>
+<body>
+
+<h1>Atualizar Registro</h1>
+<form action="/atualizarusuario/{{ resultados[0] }}" method="post">
+    <label for="usuario"></label><input type="text" value="{{ resultados[1] }}" id="usuario" name="usuario"
+                                        readonly><br>
+    <label for="senha"></label><input type="text" id="senha" name="senha" value="{{ resultados[2] }}" readonly><br>
+    <label for="per"></label>
+ <select id="per" name="per">
+            <option value="1" {% if resultados[3] == 1 %} selected {% endif %}>Usuário</option>
+            <option value="2" {% if resultados[3] == 2 %} selected {% endif %}>Moderador</option>
+            <option value="3" {% if resultados[3] == 3 %} selected {% endif %}>Administrador</option>
+        </select>
+    <input type="submit" value="Atualizar">
+</form>
+</body>
+</html>
