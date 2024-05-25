@@ -1,0 +1,2 @@
+consertar o get do deletar
+adicionar pedir senha ao inserir novos usuarios
