@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from datetime import datetime, timedelta
 from banco_de_dados import BancoDeDados
 from functools import wraps
@@ -6,16 +6,16 @@ from functools import wraps
 #const
 TIMEOUT = 600 #segundos
 
-dir = 'client/templates'
-app = Flask(__name__, template_folder=dir)
+#caso queira mudar o diretorio de templates
+#dir = 'local das templates'
+#app = Flask(__name__, template_folder=dir)
+
+app = Flask(__name__)
 banco = BancoDeDados()
 
-app.secret_key = 'chave'  # não faço a minima para que isso serve, mas se tirar dá erro
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(seconds=TIMEOUT)
+app.secret_key = 'secrKy23'
 
-@app.before_request
-def before_request():
-    session.permanent = True  #adiciona tempo de vida a sessão
+
 #funcoes
 def popout():
     session.pop('usuario', None)
@@ -24,11 +24,11 @@ def popout():
 #decoradores
 def is_autenticado(f):
     @wraps(f)
-    def decorated_function(*args, **kwargs):
+    def decorador(*args, **kwargs):
         if 'usuario' not in session:
             return redirect(url_for('login'))
         return f(*args, **kwargs)
-    return decorated_function
+    return decorador
 
 
 
@@ -50,7 +50,7 @@ def login():
             flash('Usuário não encontrado!')
         else:
             session['usuario'] = resultadoS
-            tempo = TIMEOUT
+            print(session['usuario'][1])
             return redirect(url_for('menu'))
 
     return render_template('login.html')
@@ -67,17 +67,8 @@ def buscar():
         id_c = request.form['id']
         nome = request.form['nome']
         cpf = request.form['cpf']
-        senha = request.form['senha']
-        resultadoS = banco.validar_senha(senha, session['usuario'])
-        if resultadoS == 'senha':
-            flash('Senha incorreta!')
-            return render_template('buscar.html')
-        elif resultadoS == 'usuario':
-            flash('Usuário não encontrado!')
-            return render_template('buscar.html')
-        else:
-            resultado = banco.buscar_registro_cliente(id_c, nome, cpf)
-            return render_template('resultado.html', resultado=resultado)
+        resultado = banco.buscar_registro_cliente(id_c, nome, cpf)
+        return render_template('resultado.html', resultado=resultado)
     return render_template('buscar.html')
 
 @app.route('/buscarusuario', methods=['GET', 'POST'])
@@ -121,8 +112,17 @@ def atualizar(id):
         cpf = request.form['cpf']
         historico = request.form['historico']
         score = request.form['score']
-        banco.atualizar_registro_cliente(id, nome, cpf, historico, score)
-        return redirect(url_for('menu'))
+        senha = request.form['senha']
+
+        res = banco.validar_senha(senha, session['usuario'][1])
+        print(res,type(res))
+        if res != "usuario" and res != "senha":
+                print("b")
+                banco.atualizar_registro_cliente(id, nome, cpf, historico, score)
+                return redirect(url_for('menu'))
+        else:
+            print("a")
+            return redirect(url_for("atualizar", id=id, message=res))
     resultados = banco.buscar_registro_cliente(id, "", "")[0]
     return render_template('atualizar.html', resultados=resultados)
 
@@ -140,13 +140,21 @@ def atualizarusuario(id):
     resultados = banco.buscar_registro_usuario(id, "")[0]
     return render_template('atualizarusuario.html', resultados=resultados)
 
-@app.route('/deletar/<int:id>', methods=['GET'])
+@app.route('/deletar/<int:id>', methods=['POST'])
 @is_autenticado
 def deletar(id):
-    banco.excluir_registro(1, id)
+    if request.method == 'POST':
+        senha = request.form['senha']
+        print(senha)   
+        res = banco.validar_senha(senha, session['usuario'][1])
+        if res != "usuario" and res != "senha":
+            banco.excluir_registro(1, id)
+            return redirect(url_for('menu'))
+        else:
+            return redirect(url_for("deletar", id=id, message=res))
     return redirect(url_for('menu'))
 
-@app.route('/deletarusuario/<int:id>', methods=['GET'])
+@app.route('/deletarusuario/<int:id>', methods=['GET', 'POST'])
 @is_autenticado
 def deletarusuario(id):
     if id != 1:
@@ -157,6 +165,7 @@ def deletarusuario(id):
 def logout():
     session.pop('usuario', None)
     return redirect(url_for('login'))
+
 
 
 if __name__ == '__main__':

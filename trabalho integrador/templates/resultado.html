@@ -7,6 +7,7 @@
     <title>Resultado da Busca</title>
 </head>
 <body>
+    <script src="../static/deletar.js"></script>
     <h1>Resultado da Busca</h1>
     <table border="1">
         <tr>
@@ -23,8 +24,8 @@
                 <td>{{ registro[2] }}</td>
                 <td>{{ registro[3] }}</td>
                 <td>{{ registro[4] }}</td>
-                <td><a href="/atualizar/{{ registro[0] }}">Atualizar</a></td>
-                <td><a href="/deletar/{{ registro[0] }}">Deletar</a></td>
+                <td><a href="/atualizar/{{ registro[0] }}">Modificar</a></td>
+
             </tr>
         {% endfor %}
     </table>
