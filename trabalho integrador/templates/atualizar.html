@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Registro</title>
+</head>
+<body>
+    <h1>Atualizar Registro</h1>
+    <script type="text/javascript">
+        var message = "{{ message }}";
+        if (message) {
+            alert(message);
+        }
+    </script>
+<form id="atualizar-form" action="/atualizar/{{ resultados[0] }}" method="POST">
+    <label for="nome"></label><input type="text" value="{{ resultados[1] }}" id="nome" name="nome" placeholder="Insira nome"><br>
+    <label for="cpf"></label><input type="number" id="cpf" name="cpf" value="{{ resultados[2] }}" placeholder="Insira CPF"><br>
+    <label for="historico"></label><input type="text" id="historico" value="{{ resultados[3] }}" name="historico" placeholder="Insira anos de pagamento em dia"><br>
+    <label for="score"></label><input type="number" id="score" name="score" value="{{ resultados[4] }}" placeholder="Insira Score"><br>
+    <br>
+    <label for="senha"></label><input type="password" id="senha" name="senha" placeholder="Insira sua senha"><br>
+    <input type="submit" value="Atualizar">
+</form>
+
+<form id="deletar-form"action="/deletar/{{ resultados[0] }}"  method="POST" >
+    
+    <label for="senha"></label><input type="password" id="delete-senha" name="senha" style="display: none;"><br>
+    <input type="submit" value="Deletar">
+</form>
+
+<script>
+    document.getElementById('deletar-form').addEventListener('submit', function(event) {
+        var senha = document.getElementById('senha').value;
+        document.getElementById('delete-senha').value = senha;
+    });
+</script>
+</body>
+</html>

@@ -2,7 +2,6 @@ import sqlite3
 import bcrypt
 
 
-# todo Tem muitos metodos, com muito overlap entre metodos na tabela cliente com tabela usuarios, otimizar isso!
 
 
 def hashar_senhas(senha):
