@@ -131,36 +131,66 @@ def atualizar(id):
 def atualizarusuario(id):
     if request.method == 'POST':
         usuario = request.form['usuario']
-        senha = request.form['senha']
+        senha = request.form['senhaCad']
         per = request.form['per']
-        if id == 1:
-            return "Não é possível alterar o usuário admin!"
-        banco.atualizar_registro_usuario(id, usuario, senha, per)
-        return redirect(url_for('menu'))
+        senha = request.form['senha']
+        
+        res = banco.validar_senha(senha, session['usuario'][1])
+        if res != "usuario" and res != "senha":
+            if id == 1:
+                return redirect(url_for("atualizarusuario", id=id, message="Não é possível alterar o usuário admin!"))
+            banco.atualizar_registro_usuario(id, usuario, senha, per)
+            return redirect(url_for('menu'))
     resultados = banco.buscar_registro_usuario(id, "")[0]
     return render_template('atualizarusuario.html', resultados=resultados)
 
-@app.route('/deletar/<int:id>', methods=['POST'])
+""" @app.route('/deletar/<int:id>', methods=['POST'])
 @is_autenticado
 def deletar(id):
     if request.method == 'POST':
-        senha = request.form['senha']
+        senha = request.form['delete-senha']
         print(senha)   
         res = banco.validar_senha(senha, session['usuario'][1])
         if res != "usuario" and res != "senha":
             banco.excluir_registro(1, id)
             return redirect(url_for('menu'))
         else:
-            return redirect(url_for("deletar", id=id, message=res))
+            return redirect(url_for("atualizar", id=id, message=res))
+    return redirect(url_for('menu')) """
+
+@app.route('/deletar/<int:id>', methods=['GET', 'POST'])
+@is_autenticado
+def deletar(id):
+    if request.method == 'POST':
+        senha = request.form['senha']
+        print(senha)
+        res = banco.validar_senha(senha, session['usuario'][1])
+        print(res)
+        if res != "usuario" and res != "senha":
+            banco.excluir_registro(1, id)
+            return redirect(url_for('menu'))
+        else:
+            return redirect(url_for("atualizar", id=id, message=res))
     return redirect(url_for('menu'))
 
 @app.route('/deletarusuario/<int:id>', methods=['GET', 'POST'])
 @is_autenticado
 def deletarusuario(id):
     if id != 1:
-        banco.excluir_registro(2, id)
-    return redirect(url_for('menu'))
-
+        if request.method == 'POST':
+            senha = request.form['senha']
+            print(senha)
+            res = banco.validar_senha(senha, session['usuario'][1])
+            print(res)
+            if res != "usuario" and res != "senha":
+                banco.excluir_registro(2, id)
+                return redirect(url_for('menu'))
+            else:
+                return redirect(url_for("atualizarusuario", id=id, message=res))
+        return redirect(url_for('menu'))
+    else:
+        return redirect(url_for("atualizarusuario", id=id, message="Não é possível deletar o usuário admin!"))
+    
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
