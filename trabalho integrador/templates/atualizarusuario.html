@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,25 +10,32 @@
 <h1>Atualizar Registro</h1>
 <div id="senhapopup" style="display: none;">
     <label for="senhaUs">Digite sua senha:</label>
-    <input type="senhaUs" id="senhaUs" name="senhaUs">
+    <input type="password" id="senhaUs" name="senhaUs">
     <button id="submitSenhaUS">Enviar</button>
 </div>
 <form action="/atualizarusuario/{{ resultados[0] }}" method="post" id="formAtUs">
     <label for="usuario"></label><input type="text" value="{{ resultados[1] }}" id="usuario" name="usuario"
                                         readonly><br>
-    <label for="senha"></label><input type="text" id="senha" name="senha" value="{{ resultados[2] }}" readonly><br>
+    <label for="senhaCad"></label><input type="text" id="senhaCad" name="senhaCad" value="{{ resultados[2] }}" readonly><br>
     <label for="per"></label>
- <select id="per" name="per">
-            <option value="1" {% if resultados[3] == 1 %} selected {% endif %}>Usuário</option>
-            <option value="2" {% if resultados[3] == 2 %} selected {% endif %}>Moderador</option>
-            <option value="3" {% if resultados[3] == 3 %} selected {% endif %}>Administrador</option>
-        </select>
-        <label for = "senha"></label><input type="password" id="senha" name="senha" placeholder="Insira sua senha"><br>
+    <select id="per" name="per">
+        <option value="1" {% if resultados[3] == 1 %} selected {% endif %}>Usuário</option>
+        <option value="2" {% if resultados[3] == 2 %} selected {% endif %}>Moderador</option>
+        <option value="3" {% if resultados[3] == 3 %} selected {% endif %}>Administrador</option>
+    </select>
+    <label for="senha"></label><input type="password" id="senha" name="senha" placeholder="Insira sua senha"><br>
     <input type="submit" value="Atualizar">
-
 </form>
-<form method="POST" action="/removerusuario/{{ resultados[0] }}">
+
+<form id="deletar-form" action="/deletarusuario/{{ resultados[0] }}" method="POST">
+    <input type="hidden" id="delete-senha" name="senha">
     <input type="submit" value="Deletar">
 </form>
+<script>
+    document.getElementById('deletar-form').addEventListener('submit', function(event) {
+        var senha = document.getElementById('senha').value;
+        document.getElementById('delete-senha').value = senha;
+    });
+</script>
 </body>
 </html>
