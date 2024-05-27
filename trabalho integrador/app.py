@@ -98,10 +98,16 @@ def adicionar():
 def adicionarusuario():
     if request.method == 'POST':
         usuario = request.form['usuario']
-        senha = request.form['senha']
+        senhaCad = request.form['senhaCad']
         per = int(request.form['per'])
-        banco.adicionar_registro_usuario(usuario, senha, per)
-        return redirect(url_for('menu'))
+        senha = request.form['senha']
+        res = banco.validar_senha(senha, session['usuario'][1])
+        if res != "usuario" and res != "senha":
+
+            banco.adicionar_registro_usuario(usuario, senhaCad, per)
+            return redirect(url_for('menu'))
+        else:
+            return redirect(url_for("adicionarusuario", message=res))
     return render_template('adicionarusuario.html')
 
 @app.route('/atualizar/<int:id>', methods=['GET', 'POST'])
