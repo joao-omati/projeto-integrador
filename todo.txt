@@ -1,3 +1,4 @@
-consertar o get do deletar
-adicionar pedir senha ao inserir novos usuarios
+consertar o get do deletar FEITO
+adicionar pedir senha ao inserir novos usuarios FEITO
+adicionar timeout FEITO?
 fazer os templates

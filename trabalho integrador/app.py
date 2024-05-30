@@ -2,9 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from datetime import datetime, timedelta
 from banco_de_dados import BancoDeDados
 from functools import wraps
-
 #const
-TIMEOUT = 600 #segundos
+EXPTIME = 2
 
 #caso queira mudar o diretorio de templates
 #dir = 'local das templates'
@@ -14,11 +13,12 @@ app = Flask(__name__)
 banco = BancoDeDados()
 
 app.secret_key = 'secrKy23'
+app.permanent_session_lifetime = timedelta(minutes=EXPTIME)
 
 
-#funcoes
 def popout():
     session.pop('usuario', None)
+    session.pop('ult_alt', None)
     return True
 
 #decoradores
@@ -38,8 +38,9 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    
     if 'usuario' in session:
-        session.pop('usuario', None)
+      popout()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -49,8 +50,9 @@ def login():
         elif resultadoS == 'usuario':
             flash('Usuário não encontrado!')
         else:
+            print("login realizado")
             session['usuario'] = resultadoS
-            print(session['usuario'][1])
+            session.permanent = True
             return redirect(url_for('menu'))
 
     return render_template('login.html')
