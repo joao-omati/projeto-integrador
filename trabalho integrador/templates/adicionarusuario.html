@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Registro</title>
+    <title>Adicionar Usuario</title>
+    <link rel="stylesheet" href="../static/css/adicionarusuario.css">
+    <style>
+        a {
+            color: white; /* Define a cor do link como branco */
+            text-decoration: none; /* Remove o sublinhado padrão */
+        }
+    </style>
 </head>
+
 <body>
-<h1>Adicionar Registro</h1>
+<a href="/menu">Voltar</a>
+<h1>Adicionar Usuario</h1>
 <form action="/adicionarusuario" method="post">
     <label for="usuario"></label><input type="text" id="usuario" name="usuario" placeholder="Insira usuario"><br>
     <label for="senhaCad"></label><input type="text" id="senhaCad" name="senhaCad" placeholder="Insira senha"><br>
@@ -17,8 +26,6 @@
         <option value="3">Administrador</option>
     </select>
     <label for="senha"></label><input type="password" id="senha" name="senha" placeholder="Insira sua senha"><br>
-
-
 </form>
 </body>
 </html>

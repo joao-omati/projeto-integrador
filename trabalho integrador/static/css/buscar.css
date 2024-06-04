@@ -1,0 +1,71 @@
+body {
+    background-image: url('https://i.ytimg.com/vi/96toa_65XzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAs1FpzETbZR0zDCUPq943TGzckbg'); /* URL da imagem de fundo */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem no fundo */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-attachment: fixed; /* Fixa a imagem ao fundo */
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c; /* Um tom de preto mais suave */
+    color: #1c1c1c; /* Um tom de preto mais escuro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #00aaff; /* Cor azul clara para destaque */
+}
+
+form {
+    background-color: #1c1c1c; /* Fundo azul escuro */
+    padding: 20px;
+    border-radius: 8px; /* Bordas mais arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
+    width: 300px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+    color: #b0b0b0; /* Cor cinza para o texto do label */
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    padding: 12px; /* Mais espaço interno */
+    margin-bottom: 20px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #3e3e3e; /* Fundo cinza médio */
+    color: #fff;
+    box-sizing: border-box; /* Para incluir padding e border no tamanho total */
+}
+
+input[type="submit"] {
+    background-color: #00aaff; /* Cor azul clara para destaque */
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Suave transição de cor */
+}
+
+input[type="submit"]:hover {
+    background-color: #0088cc; /* Azul mais escuro no hover */
+}
+
+a {
+    color: #00aaff; /* Cor azul clara para links */
+    text-decoration: none; /* Remover sublinhado padrão */
+}
+
+a:hover {
+    color: #0088cc; /* Azul mais escuro no hover */
+}

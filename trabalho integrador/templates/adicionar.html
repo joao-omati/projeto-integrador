@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Registro</title>
+    <title>Banco do bikini - Adicionar Cliente ou Usuário</title>
+    <link rel="stylesheet" href="../static/css/adicionar.css">
+    
 </head>
+
 <body>
-    <h1>Adicionar Registro</h1>
+    <h1>Banco do bikini - Adicionar Cliente ou Usuário</h1>
+    <br>
+    <a href="/menu">Voltar</a>
+    <br>
     <form action="/adicionar" method="post">
-        <label for="nome"></label><input type="text" id="nome" name="nome" placeholder="Insira nome"><br>
-        <label for="cpf"></label><input type="number" id="cpf" name="cpf"  placeholder="Insira CPF"><br>
-        <label for="historico"></label><input type="text" id="historico" name="historico"  placeholder="Insira anos de pagamento em dia"><br>
-        <label for="score"></label><input type="number" id="score" name="score"  placeholder="Insira Score"><br>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" placeholder="Insira nome" required><br>
+        
+        <label for="cpf">CPF:</label>
+        <input type="number" id="cpf" name="cpf" placeholder="Insira CPF" required><br>
+        
+        <label for="historico">Histórico:</label>
+        <input type="text" id="historico" name="historico" placeholder="Insira anos de pagamento em dia" required><br>
+        
+        <label for="score">Score:</label>
+        <input type="number" id="score" name="score" placeholder="Insira Score" required><br>
+        
         <input type="submit" value="Adicionar">
     </form>
 </body>

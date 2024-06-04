@@ -1,0 +1,61 @@
+body {
+    
+    background-image: url('https://i.pinimg.com/originals/53/d6/c0/53d6c058b590c883879afc24405a363e.png'); /* URL da imagem de fundo */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem no fundo */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-attachment: fixed; /* Fixa a imagem ao fundo */
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c; /* Um tom de preto mais suave */
+    color: #e0e0e0; /* Um tom de branco mais suave */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #00aaff; /* Cor azul clara para destaque */
+}
+
+table {
+    background-color: #1c1c1c; /* Fundo azul escuro */
+    padding: 20px;
+    border-radius: 8px; /* Bordas mais arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
+    width: 80%;
+    max-width: 800px; /* Limitando a largura da tabela */
+    margin-top: 20px; /* Espaço entre o título e a tabela */
+    border-collapse: collapse; /* Remover espaçamento entre células */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    color: #fff; /* Cor do texto branca */
+}
+
+th {
+    background-color: #555; /* Cor de fundo mais escura para os cabeçalhos */
+}
+
+tr:nth-child(even) {
+    background-color: #3e3e3e; /* Cor de fundo cinza médio para linhas pares */
+}
+
+tr:nth-child(odd) {
+    background-color: #2e2e2e; /* Cor de fundo cinza escuro para linhas ímpares */
+}
+
+a {
+    color: #00aaff; /* Cor azul clara para links */
+    text-decoration: none; /* Removendo o sublinhado padrão */
+}
+
+a:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+}

@@ -1,41 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../static/styles/login.css">
+    <title>Login - Banco do Bikini</title>
+    <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
-    <script>
-        function showPopup(message) {
-            document.getElementById("popup-text").innerText = message;
-            document.getElementById("popup").style.display = "block";
-        }
-    </script>
-
-    <div id="popup" style="display: none;">
-        <p id="popup-text"></p>
+    <div class="container">
+        <h1>Login - Banco do BikiniI</h1>
+        <form action="/login" method="post">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <input type="submit" value="Login">
+        
+        
+        </form>
     </div>
-
-<h1>Login</h1>
-<form action="/login" method="post">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username"><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Login">
-
-
-</form>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<script>
-    showPopup("{{ messages[0] }}");
-</script>
-    
-{% endif %}
-{% endwith %}
 </body>
 </html>
-    

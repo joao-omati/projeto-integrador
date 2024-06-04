@@ -1,0 +1,67 @@
+body {
+    background-image: url('https://images7.alphacoders.com/128/1281519.jpg'); /* URL da imagem de fundo */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem no fundo */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-attachment: fixed; /* Fixa a imagem ao fundo */
+
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c; /* Um tom de preto mais suave */
+    color: #1c1c1c; /* Um tom de preto mais escuro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color:#2b00ff; /* Cor azul clara para destaque */
+}
+
+form {
+    background-color: #1c1c1c; /* Fundo azul escuro */ /* Fundo branco */
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    max-width: 400px;
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #1c1c1c; /* Cor azul escura */
+}
+
+input[type="text"], input[type="password"], select {
+    width: 100%;
+    padding: 10px;
+    background-color: #3e3e3e; /* Fundo cinza médio */
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #003366;
+    color: white;
+    border: 1px solid #555;
+    padding: 10px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="submit"]:hover {
+    background-color: #0088cc;
+}

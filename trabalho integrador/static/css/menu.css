@@ -1,0 +1,47 @@
+body {
+
+    font-family: Arial, sans-serif;
+    background-image: url('https://images.uncyc.org/pt/thumb/2/26/Fenda_do_Biquíni.jpg/600px-Fenda_do_Biquíni.jpg'); /* URL da imagem de fundo */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem no fundo */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-attachment: fixed; /* Fixa a imagem ao fundo */
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c; /* Fundo normal */
+    color: #fff; /* Cor do texto branco */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #00aaff; /* Cor azul clara para destaque */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-bottom: 10px;
+}
+
+nav ul li a {
+    display: block;
+    padding: 20px; /* Espaçamento maior para ícones grandes */
+    background-color: #1c1c1c; /* Fundo azul escuro */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
+}
+
+nav ul li a:hover {
+    background-color: #0088cc; /* Azul mais escuro no hover */
+}

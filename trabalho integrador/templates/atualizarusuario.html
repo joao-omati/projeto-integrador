@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizar Usuario</title>
+    <link rel="stylesheet" href="../static/css/atualizarusuario.css">
 </head>
 <body>
-    <script src="../static/validarsenha.js"></script>
+
 <h1>Atualizar Registro</h1>
 <div id="senhapopup" style="display: none;">
     <label for="senhaUs">Digite sua senha:</label>
     <input type="password" id="senhaUs" name="senhaUs">
     <button id="submitSenhaUS">Enviar</button>
 </div>
+<a href="/menu">Voltar</a>
 <form action="/atualizarusuario/{{ resultados[0] }}" method="post" id="formAtUs">
     <label for="usuario"></label><input type="text" value="{{ resultados[1] }}" id="usuario" name="usuario"
                                         readonly><br>
-    <label for="senhaCad"></label><input type="text" id="senhaCad" name="senhaCad" value="{{ resultados[2] }}" readonly><br>
+    <label for="senhaCad"></label><input type="text" id="senhaCad" name="senhaCad" ><br>
     <label for="per"></label>
     <select id="per" name="per">
         <option value="1" {% if resultados[3] == 1 %} selected {% endif %}>Usuário</option>
@@ -26,7 +28,7 @@
     <label for="senha"></label><input type="password" id="senha" name="senha" placeholder="Insira sua senha"><br>
     <input type="submit" value="Atualizar">
 </form>
-
+<a href="/menu">Voltar</a></li>
 <form id="deletar-form" action="/deletarusuario/{{ resultados[0] }}" method="POST">
     <input type="hidden" id="delete-senha" name="senha">
     <input type="submit" value="Deletar">
