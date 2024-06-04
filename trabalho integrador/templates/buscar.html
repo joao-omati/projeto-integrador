@@ -1,25 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Registros</title>
+    <title>Banco XYZ - Buscar Registros</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #004080;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        select, input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #003366;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #004080;
+        }
+    </style>
 </head>
 <body>
-    <h1>Buscar Registros</h1>
-    <href="" method="post">
-
-    <br>
-    <a href="/menu">Voltar</a>
-    <br>
+    <h1>Banco XYZ - Buscar Registros</h1>
     <form action="/buscar" method="post">
-
-
-        <label for="id"></label><input type="number" id="id" name="id"  placeholder="Insira ID"><br>
-        <label for="nome"></label><input type="text" id="nome" name="nome" placeholder="Insira nome"><br>
-        <label for="cpf"></label><input type="number" id="cpf" name="cpf"  placeholder="Insira CPF"><br>
-        <br>
-
+        <label for="tipo">Tipo de Registro:</label>
+        <select id="tipo" name="tipo">
+            <option value="1">Cliente</option>
+            <option value="2">Usuário</option>
+        </select>
         <input type="submit" value="Buscar">
     </form>
 </body>

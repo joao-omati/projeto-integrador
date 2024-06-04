@@ -1,24 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Registro</title>
+    <title>Adicionar Registro - Banco</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        header {
+            background-color: #0070C0;
+            color: white;
+            padding: 10px 0;
+            border-radius: 10px 10px 0 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        label {
+            margin: 10px 0 5px;
+            text-align: left;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"], select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #0070C0;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #005999;
+        }
+        a {
+            text-decoration: none;
+            color: #0070C0;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        a:hover {
+            color: #005999;
+        }
+    </style>
 </head>
 <body>
-<h1>Adicionar Registro</h1>
-<form action="/adicionarusuario" method="post">
-    <label for="usuario"></label><input type="text" id="usuario" name="usuario" placeholder="Insira usuario"><br>
-    <label for="senhaCad"></label><input type="text" id="senhaCad" name="senhaCad" placeholder="Insira senha"><br>
-    <input type="submit" value="Adicionar">
-    <select id="per" name="per">
-        <option value="1">Usuário</option>
-        <option value="2">Moderador</option>
-        <option value="3">Administrador</option>
-    </select>
-    <label for="senha"></label><input type="password" id="senha" name="senha" placeholder="Insira sua senha"><br>
-
-
-</form>
+    <div class="container">
+        <header>
+            <h1>Adicionar Registro</h1>
+        </header>
+        <form action="/adicionarusuario" method="post">
+            <label for="usuario">Usuário</label>
+            <input type="text" id="usuario" name="usuario" placeholder="Insira usuário">
+            
+            <label for="senhaCad">Senha</label>
+            <input type="text" id="senhaCad" name="senhaCad" placeholder="Insira senha">
+            
+            <label for="per">Permissão</label>
+            <select id="per" name="per">
+                <option value="1">Usuário</option>
+                <option value="2">Moderador</option>
+                <option value="3">Administrador</option>
+            </select>
+            
+            <label for="senha">Confirme sua Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Insira sua senha">
+            
+            <input type="submit" value="Adicionar">
+        </form>
+        <a href="/menu">Voltar ao Menu</a>
+    </div>
 </body>
-</html>

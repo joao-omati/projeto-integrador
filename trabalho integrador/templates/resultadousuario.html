@@ -1,35 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <!---->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado da Busca</title>
+    <title>Resultado da Busca - Banco</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+        }
+        header {
+            background-color: #0070C0;
+            color: white;
+            padding: 10px 0;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        a {
+            text-decoration: none;
+            color: #0070C0;
+            margin-top: 20px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #005999;
+        }
+        p {
+            margin: 20px 0;
+            font-size: 1em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #0070C0;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+        .btn-modificar {
+            background-color: #0070C0;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-modificar:hover {
+            background-color: #005999;
+        }
+    </style>
 </head>
 <body>
-    <h1>Resultado da Busca</h1>
-    <a href="/menu">Voltar</a>
-    <br>
-    <p1>Para atualizar/ deletar um registro, clique no link "Modificar" na linha do registro desejado.</p1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Usuario</th>
-            <th>Senha</th>
-            <th>Permissão</th>
-
-        </tr>
-        {% for registro in resultado %}
-            <tr>
-                <td>{{ registro[0] }}</td>
-                <td>{{ registro[1] }}</td>
-                <td>{{ registro[2] }}</td>
-                <td>{{ registro[3] }}</td>
-                <td>{{ registro[4] }}</td>
-                <td><a href="/atualizarusuario/{{ registro[0] }}">Modificar</a></td>
-                
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+        <header>
+            <h1>Resultado da Busca</h1>
+        </header>
+        <a href="/menu">Voltar ao Menu</a>
+        <p>Para atualizar/deletar um registro, clique no link "Modificar" na linha do registro desejado.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuário</th>
+                    <th>Senha</th>
+                    <th>Permissão</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in resultado %}
+                    <tr>
+                        <td>{{ registro[0] }}</td>
+                        <td>{{ registro[1] }}</td>
+                        <td>{{ registro[2] }}</td>
+                        <td>{{ registro[3] }}</td>
+                        <td><a href="/atualizarusuario/{{ registro[0] }}" class="btn-modificar">Modificar</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

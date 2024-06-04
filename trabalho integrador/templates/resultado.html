@@ -1,35 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <!---->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado da Busca</title>
+    <title>Resultado da Busca - Banco XYZ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #004080;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #003366;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h1>Resultado da Busca</h1>
-    <a href="/menu">Voltar</a>
-    <br>
-    <p1>Para atualizar/ deletar um registro, clique no link "Modificar" na linha do registro desejado.</p1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Histórico</th>
-            <th>Score</th>
-        </tr>
-        {% for registro in resultado %}
-            <tr>
-                <td>{{ registro[0] }}</td>
-                <td>{{ registro[1] }}</td>
-                <td>{{ registro[2] }}</td>
-                <td>{{ registro[3] }}</td>
-                <td>{{ registro[4] }}</td>
-                <td><a href="/atualizar/{{ registro[0] }}">Modificar</a></td>
+    <h1>Resultado da Busca - Banco XYZ</h1>
 
-            </tr>
-        {% endfor %}
-    </table>
-</body>
-</html>

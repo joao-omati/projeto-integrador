@@ -1,41 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualizar Usuario</title>
+    <title>Atualizar Usuário - Banco</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        header {
+            background-color: #0070C0;
+            color: white;
+            padding: 10px 0;
+            border-radius: 10px 10px 0 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        label {
+            margin: 10px 0 5px;
+            text-align: left;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"], select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #0070C0;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #005999;
+        }
+        #senhapopup {
+            margin-bottom: 20px;
+        }
+        #senhapopup label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        #senhapopup input[type="password"] {
+            margin-bottom: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #0070C0;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        a:hover {
+            color: #005999;
+        }
+    </style>
 </head>
 <body>
-    <script src="../static/validarsenha.js"></script>
-<h1>Atualizar Registro</h1>
-<div id="senhapopup" style="display: none;">
-    <label for="senhaUs">Digite sua senha:</label>
-    <input type="password" id="senhaUs" name="senhaUs">
-    <button id="submitSenhaUS">Enviar</button>
-</div>
-<form action="/atualizarusuario/{{ resultados[0] }}" method="post" id="formAtUs">
-    <label for="usuario"></label><input type="text" value="{{ resultados[1] }}" id="usuario" name="usuario"
-                                        readonly><br>
-    <label for="senhaCad"></label><input type="text" id="senhaCad" name="senhaCad" value="{{ resultados[2] }}" readonly><br>
-    <label for="per"></label>
-    <select id="per" name="per">
-        <option value="1" {% if resultados[3] == 1 %} selected {% endif %}>Usuário</option>
-        <option value="2" {% if resultados[3] == 2 %} selected {% endif %}>Moderador</option>
-        <option value="3" {% if resultados[3] == 3 %} selected {% endif %}>Administrador</option>
-    </select>
-    <label for="senha"></label><input type="password" id="senha" name="senha" placeholder="Insira sua senha"><br>
-    <input type="submit" value="Atualizar">
-</form>
+    <div class="container">
+        <header>
+            <h1>Atualizar Registro</h1>
+        </header>
+        <div id="senhapopup" style="display: none;">
+            <label for="senhaUs">Digite sua senha:</label>
+            <input type="password" id="senhaUs" name="senhaUs">
+            <button id="submitSenhaUS">Enviar</button>
+        </div>
+        <form action="/atualizarusuario/{{ resultados[0] }}" method="post" id="formAtUs">
+            <label for="usuario">Usuário</label>
+            <input type="text" value="{{ resultados[1] }}" id="usuario" name="usuario" readonly>
 
-<form id="deletar-form" action="/deletarusuario/{{ resultados[0] }}" method="POST">
-    <input type="hidden" id="delete-senha" name="senha">
-    <input type="submit" value="Deletar">
-</form>
-<script>
-    document.getElementById('deletar-form').addEventListener('submit', function(event) {
-        var senha = document.getElementById('senha').value;
-        document.getElementById('delete-senha').value = senha;
-    });
-</script>
+            <label for="senhaCad">Senha Cadastrada</label>
+            <input type="text" id="senhaCad" name="senhaCad" value="{{ resultados[2] }}" readonly>
+
+            <label for="per">Permissão</label>
+            <select id="per" name="per">
+                <option value="1" {% if resultados[3] == 1 %} selected {% endif %}>Usuário</option>
+                <option value="2" {% if resultados[3] == 2 %} selected {% endif %}>Moderador</option>
+                <option value="3" {% if resultados[3] == 3 %} selected {% endif %}>Administrador</option>
+            </select>
+
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Insira sua senha">
+
+            <input type="submit" value="Atualizar">
+        </form>
+
+        <form id="deletar-form" action="/deletarusuario/{{ resultados[0] }}" method="POST">
+            <input type="hidden" id="delete-senha" name="senha">
+            <input type="submit" value="Deletar">
+        </form>
+    </div>
+    <script>
+        document.getElementById('deletar-form').addEventListener('submit', function(event) {
+            var senha = document.getElementById('senha').value;
+            document.getElementById('delete-senha').value = senha;
+        });
+    </script>
 </body>
 </html>
