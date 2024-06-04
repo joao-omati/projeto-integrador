@@ -111,7 +111,7 @@ class BancoDeDados:
             cursor.execute('SELECT * FROM usuario WHERE usuario_usuario LIKE ?', (usuario,))
             x = cursor.fetchall()
             print(x)
-            if x is None:
+            if not x:
                 cursor.execute(
                     'INSERT INTO usuario (usuario_usuario, usuario_senha, usuario_nivel) VALUES (?, ?, ?)',
                     (usuario, senha, nivel))
