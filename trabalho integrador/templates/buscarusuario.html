@@ -3,79 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Registros - Banco</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 20px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
-        header {
-            background-color: #0070C0;
-            color: white;
-            padding: 10px 0;
-            border-radius: 10px 10px 0 0;
-        }
-        header h1 {
-            margin: 0;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            margin-top: 20px;
-        }
-        label {
-            margin: 10px 0 5px;
-            text-align: left;
-        }
-        input[type="number"], input[type="text"], input[type="password"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-        }
-        input[type="submit"] {
-            background-color: #0070C0;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #005999;
-        }
-        a {
-            text-decoration: none;
-            color: #0070C0;
-            margin-top: 20px;
-            display: inline-block;
-        }
-        a:hover {
-            color: #005999;
-        }
-    </style>
+    <title>Buscar Usuarios - Banco</title>
+    <link rel="stylesheet" href="../static/css/buscarusuario.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Buscar Registros</h1>
+            <h1>Buscar Usuarios</h1>
         </header>
         <a href="/menu">Voltar</a>
         <form action="/buscarusuario" method="post">

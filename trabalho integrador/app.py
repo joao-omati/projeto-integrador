@@ -1,14 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from datetime import datetime, timedelta
 from banco_de_dados import BancoDeDados
+from banco_de_dados import hashar_senhas
 from functools import wraps
 #const
-EXPTIME = 2
+EXPTIME = 15
 
 #caso queira mudar o diretorio de templates
 #dir = 'local das templates'
 #app = Flask(__name__, template_folder=dir)
-
+'''
+    if session['usuario'][3] < 3:
+        return redirect(url_for('menu')) 
+'''
 app = Flask(__name__)
 banco = BancoDeDados()
 
@@ -30,6 +34,16 @@ def is_autenticado(f):
         return f(*args, **kwargs)
     return decorador
 
+def verificar_permissao(nivel_permissao):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            if session.get('usuario') and session['usuario'][3] < nivel_permissao:
+                return redirect(url_for('menu'))
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
 
 
 @app.route('/')
@@ -46,12 +60,15 @@ def login():
         password = request.form['password']
         resultadoS = banco.validar_senha(password, username)
         if resultadoS == 'senha':
+            print("senha incorreta")
             flash('Senha incorreta!')
         elif resultadoS == 'usuario':
+            print("usuario não encontrado")
             flash('Usuário não encontrado!')
         else:
             print("login realizado")
             session['usuario'] = resultadoS
+            print(session['usuario'][3], type(session['usuario'][3]))
             session.permanent = True
             return redirect(url_for('menu'))
 
@@ -75,17 +92,27 @@ def buscar():
 
 @app.route('/buscarusuario', methods=['GET', 'POST'])
 @is_autenticado
-def buscarusuario():
+@verificar_permissao(nivel_permissao=3)
+def buscarusuario():  
     if request.method == 'POST':
         id_u = request.form['id']
         usuario = request.form['usuario']
+        senha = request.form['senha']
+
+        res = banco.validar_senha(senha, session['usuario'][1])
+        if res == 'usuario':
+            return redirect(url_for('buscarusuario', message=res))
+        elif res == 'senha':
+            return redirect(url_for('buscarusuario', message=res))
+        
         resultado = banco.buscar_registro_usuario(id_u, usuario)
         return render_template('resultadousuario.html', resultado=resultado)
     return render_template('buscarusuario.html')
 
 @app.route('/adicionar', methods=['GET', 'POST'])
 @is_autenticado
-def adicionar():
+@verificar_permissao(nivel_permissao=2)
+def adicionar():  
     if request.method == 'POST':
         nome = request.form['nome']
         cpf = request.form['cpf']
@@ -97,6 +124,7 @@ def adicionar():
 
 @app.route('/adicionarusuario', methods=['GET', 'POST'])
 @is_autenticado
+@verificar_permissao(nivel_permissao=3)
 def adicionarusuario():
     if request.method == 'POST':
         usuario = request.form['usuario']
@@ -106,20 +134,23 @@ def adicionarusuario():
         res = banco.validar_senha(senha, session['usuario'][1])
         if res != "usuario" and res != "senha":
 
-            banco.adicionar_registro_usuario(usuario, senhaCad, per)
-            return redirect(url_for('menu'))
+            res = banco.adicionar_registro_usuario(usuario, senhaCad, per)
+            if res == 1: return redirect(url_for("adicionarusuario", message="Usuário já existe!"))
+            elif res == 0: return redirect(url_for('menu'))
         else:
             return redirect(url_for("adicionarusuario", message=res))
     return render_template('adicionarusuario.html')
 
 @app.route('/atualizar/<int:id>', methods=['GET', 'POST'])
 @is_autenticado
+@verificar_permissao(nivel_permissao=2)
 def atualizar(id):
     if request.method == 'POST':
         nome = request.form['nome']
         cpf = request.form['cpf']
         historico = request.form['historico']
         score = request.form['score']
+
         senha = request.form['senha']
 
         res = banco.validar_senha(senha, session['usuario'][1])
@@ -136,38 +167,30 @@ def atualizar(id):
 
 @app.route('/atualizarusuario/<int:id>', methods=['GET', 'POST'])
 @is_autenticado
+@verificar_permissao(nivel_permissao=3)
 def atualizarusuario(id):
     if request.method == 'POST':
         usuario = request.form['usuario']
-        senha = request.form['senhaCad']
+        senhaCad = request.form['senhaCad']
+        if senhaCad == "":
+            senhaCad = None
         per = request.form['per']
         senha = request.form['senha']
-        
+
         res = banco.validar_senha(senha, session['usuario'][1])
         if res != "usuario" and res != "senha":
             if id == 1:
                 return redirect(url_for("atualizarusuario", id=id, message="Não é possível alterar o usuário admin!"))
-            banco.atualizar_registro_usuario(id, usuario, senha, per)
+            banco.atualizar_registro_usuario(id, usuario, senhaCad, per)
             return redirect(url_for('menu'))
     resultados = banco.buscar_registro_usuario(id, "")[0]
     return render_template('atualizarusuario.html', resultados=resultados)
 
-""" @app.route('/deletar/<int:id>', methods=['POST'])
-@is_autenticado
-def deletar(id):
-    if request.method == 'POST':
-        senha = request.form['delete-senha']
-        print(senha)   
-        res = banco.validar_senha(senha, session['usuario'][1])
-        if res != "usuario" and res != "senha":
-            banco.excluir_registro(1, id)
-            return redirect(url_for('menu'))
-        else:
-            return redirect(url_for("atualizar", id=id, message=res))
-    return redirect(url_for('menu')) """
+
 
 @app.route('/deletar/<int:id>', methods=['GET', 'POST'])
 @is_autenticado
+@verificar_permissao(nivel_permissao=2)
 def deletar(id):
     if request.method == 'POST':
         senha = request.form['senha']
@@ -183,6 +206,7 @@ def deletar(id):
 
 @app.route('/deletarusuario/<int:id>', methods=['GET', 'POST'])
 @is_autenticado
+@verificar_permissao(nivel_permissao=3)
 def deletarusuario(id):
     if id != 1:
         if request.method == 'POST':

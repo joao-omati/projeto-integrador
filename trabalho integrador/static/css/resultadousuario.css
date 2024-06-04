@@ -1,0 +1,99 @@
+body {
+    background-image: url('https://i.pinimg.com/originals/53/d6/c0/53d6c058b590c883879afc24405a363e.png'); /* URL da imagem de fundo */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem no fundo */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-attachment: fixed; /* Fixa a imagem ao fundo */
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c; /* Um tom de preto mais suave */
+    color: #e0e0e0; /* Um tom de branco mais suave */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container {
+    background-color: #1c1c1c; /* Fundo azul escuro */
+    padding: 40px 180px;
+    border-radius: 10px; /* Bordas mais arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+}
+
+header {
+    background-color: #0070C0; /* Azul claro */
+    color: white;
+    padding: 10px 0;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+a {
+    text-decoration: none;
+    color: #00aaff; /* Cor azul clara para links */
+    margin-top: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #0088cc; /* Azul mais escuro no hover */
+}
+
+p {
+    margin: 20px 0;
+    font-size: 1em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remover espaçamento entre células */
+    margin: 20px 0;
+    background-color: #1c1c1c; /* Fundo azul escuro */
+    border-radius: 8px; /* Bordas mais arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #555; /* Borda cinza escura */
+    text-align: center;
+    color: #fff; /* Cor do texto branca */
+}
+
+th {
+    background-color: #555; /* Cor de fundo mais escura para os cabeçalhos */
+}
+
+tr:nth-child(even) {
+    background-color: #3e3e3e; /* Cor de fundo cinza médio para linhas pares */
+}
+
+tr:hover {
+    background-color: #2e2e2e; /* Fundo cinza escuro ao passar o mouse */
+}
+
+.btn-modificar {
+    background-color: #00aaff; /* Cor azul clara para destaque */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s; /* Suave transição de cor */
+}
+
+.btn-modificar:hover {
+    background-color: #0088cc; /* Azul mais escuro no hover */
+}

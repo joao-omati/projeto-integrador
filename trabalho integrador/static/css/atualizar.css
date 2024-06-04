@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #00aaff; /* Cor azul clara para destaque */
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #1c1c1c; /* Fundo azul escuro */
+    padding: 20px 40px;
+    border-radius: 8px; /* Bordas mais arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #b0b0b0; /* Cor cinza para o texto do label */
+}
+
+input[type="text"], input[type="number"], input[type="password"] {
+    width: 100%;
+    padding: 12px; /* Mais espaço interno */
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background-color: #3e3e3e; /* Fundo cinza médio */
+    color: #fff;
+    box-sizing: border-box; /* Para incluir padding e border no tamanho total */
+}
+
+input[type="submit"] {
+    background-color: #00aaff; /* Cor azul clara para destaque */
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s; /* Suave transição de cor */
+}
+
+input[type="submit"]:hover {
+    background-color: #0088cc; /* Azul mais escuro no hover */
+}

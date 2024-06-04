@@ -4,67 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Bancário</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9e9e9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #004080;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #003366;
-            border-top: 2px solid #004080;
-        }
-        li {
-            float: left;
-        }
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        li a:hover {
-            background-color: #004080;
-        }
-        /* Adicionando ícones para cada opção */
-        li:nth-child(1) a::before {
-            content: "\1F464";
-            margin-right: 10px;
-        }
-        li:nth-child(2) a::before {
-            content: "\1F4DD";
-            margin-right: 10px;
-        }
-        li:nth-child(3) a::before {
-            content: "\1F464";
-            margin-right: 10px;
-        }
-        li:nth-child(4) a::before {
-            content: "\1F50E";
-            margin-right: 10px;
-        }
-        li:nth-child(5) a::before {
-            content: "\1F5D1";
-            margin-right: 10px;
-        }
-        li:nth-child(6) a::before {
-            content: "\1F6AA";
-            margin-right: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/css/menu.css">
 </head>
 <body>
     <header>
@@ -72,11 +12,10 @@
     </header>
     <nav>
         <ul>
+            <li><a href="/buscar">Buscar Registros</a></li>
             <li><a href="/buscarusuario">Buscar Usuários</a></li>
             <li><a href="/adicionar">Adicionar Registro</a></li>
             <li><a href="/adicionarusuario">Adicionar Usuário</a></li>
-            <li><a href="/atualizar">Atualizar Registro</a></li>
-            <li><a href="/excluir">Excluir Registro</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>

@@ -108,11 +108,18 @@ class BancoDeDados:
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()
             senha = hashar_senhas(senha)
-            cursor.execute(
-                'INSERT INTO usuario (usuario_usuario, usuario_senha, usuario_nivel) VALUES (?, ?, ?)',
-                (usuario, senha, nivel))
-            con.commit()        
-
+            cursor.execute('SELECT * FROM usuario WHERE usuario_usuario LIKE ?', (usuario,))
+            x = cursor.fetchall()
+            print(x)
+            if x is None:
+                cursor.execute(
+                    'INSERT INTO usuario (usuario_usuario, usuario_senha, usuario_nivel) VALUES (?, ?, ?)',
+                    (usuario, senha, nivel))
+                con.commit()
+                return 0
+            else:
+                return 1        
+    
     def buscar_registro_usuario(self, id, usuario):
         with sqlite3.connect(self.nome_banco) as con:
             cursor = con.cursor()

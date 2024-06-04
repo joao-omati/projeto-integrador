@@ -1,0 +1,75 @@
+body 
+
+{
+    background-image: url('https://cdna.artstation.com/p/assets/images/images/030/667/832/large/alef-nery-fenda-pos.jpg?1601304643'); /* URL da imagem de fundo */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem no fundo */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-attachment: fixed; /* Fixa a imagem ao fundo */
+
+    background-color: #1c1c1c; /* Um tom de preto mais suave */
+    color: #e0e0e0; /* Um tom de branco mais suave */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #00aaff; /* Cor azul clara para destaque */
+}
+
+form {
+    background-color: #2e2e2e; /* Fundo cinza escuro */
+    padding: 20px;
+    border-radius: 8px; /* Bordas mais arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais forte */
+    width: 300px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+    color: #b0b0b0; /* Cor cinza para o texto do label */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px; /* Mais espaço interno */
+    margin-bottom: 20px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #3e3e3e; /* Fundo cinza médio */
+    color: #fff;
+    box-sizing: border-box; /* Para incluir padding e border no tamanho total */
+}
+
+input[type="submit"] {
+    background-color: #00aaff; /* Cor azul clara para destaque */
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Suave transição de cor */
+}
+
+input[type="submit"]:hover {
+    background-color: #0088cc; /* Azul mais escuro no hover */
+}
+
+#popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #2e2e2e;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    color: #e0e0e0;
+}
