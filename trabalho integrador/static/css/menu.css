@@ -1,7 +1,7 @@
 body {
 
     font-family: Arial, sans-serif;
-    background-image: url('https://images.uncyc.org/pt/thumb/2/26/Fenda_do_Biquíni.jpg/600px-Fenda_do_Biquíni.jpg'); /* URL da imagem de fundo */
+    background-image: url('https://cdna.artstation.com/p/assets/images/images/030/667/832/large/alef-nery-fenda-pos.jpg?1601304643'); /* URL da imagem de fundo */
     background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
     background-position: center; /* Centraliza a imagem no fundo */
     background-repeat: no-repeat; /* Impede que a imagem se repita */
@@ -20,7 +20,7 @@ body {
 
 h1 {
     margin-bottom: 20px;
-    color: #00aaff; /* Cor azul clara para destaque */
+    color: #161d21; /* Cor azul clara para destaque */
 }
 
 nav ul {
